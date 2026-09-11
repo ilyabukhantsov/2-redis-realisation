@@ -65,16 +65,3 @@ func (d *Data) Get(key string) (value any, err error) {
 	}
 	return nil, ErrKeyNotFound
 }
-
-// Delete removes the value associated with key.
-func (d *Data) Delete(key string) error {
-	d.mu.Lock()
-	defer d.mu.Unlock()
-
-	if _, exists := d.store[key]; !exists {
-		return ErrKeyNotFound
-	}
-
-	delete(d.store, key)
-	return nil
-}
